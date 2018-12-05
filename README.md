@@ -576,11 +576,80 @@ now in layouts/app.blade.php include the messages file in div id app
  and now we are good to go our form validatioon stuff is added, sessions are handled
  yes so now we have done create and read work from database
 in you navbar create a link with ```href="/posts/create``` that'll do for now you can also use laravel cke-editor for body of your form
-#123
 
 
+# Edit and delete data
+
+## edit
+in posts/show.blade.php
+```
+<a href="/posts/{{$post->id}}/edit" class="btn btn-default">Edit</a>
+``` 
+include this and this will call to the edit function in PostsController.php
+ 
+include this in edit function
+```
+$post = post::find($id);
+return view('posts.edit')->with('post',$post);
+```
+now create edit.blade.php andd add this code
+```
+@extends('layouts.app')
+
+@section('content')
+
+      <h1>Edit your post</h1>
+      {!! Form::open(['action' => ['PostsController@update', $post->id], 'method' => 'POST','enctype' => 'multipart/form-data', ]) !!}
+          <div class="form-group">
+          	 {{Form::label('title','Title')}}
+          	 {{Form::text('title', $post->title, ['class' => 'form-control', 'placeholder' => 'Title' ])}}
+          </div>
+          <div class="form-group">
+          	 {{Form::label('body','Body')}}
+          	 {{Form::textarea('body', $post->body,['id' => 'article-ckeditor','class' => 'form-control', 'placeholder' => 'body text' ])}}
+          </div>	
+          
+          {{Form::hidden('_method','PUT')}}
+          {{Form::submit('Submit',['Class'=>'btn btn-primary'])}}
+      {!! Form::close() !!}
+@endsection
+```
+now this will create a updata request to update() function and therefore we pass the value $post->id as sent to $id to update 
+now in update function add this
+```
+$this->validate($request, [
+            'title' => 'required',
+            'body'  => 'required'
+        ]);
+       
+       //create post
+        $post = post::find($id);
+        $post->title = $request->input('title');
+        $post->body = $request->input('body');
+
+        $post->save();
 
 
+        return redirect('/posts')->with('success','Post updated');
+  ```      
+now we have updated the data 
+# delete data
+
+add this in show.blade.php
+```
+ {!!Form::open(['action' => ['PostsController@destroy', $post->id ], 'method' => 'POST', 'class' =>'pull-right'])!!}
+         {{Form::hidden('_method','DELETE')}}
+         {{Form::submit('Delete',['class' => 'btn btn-danger'])}}
+ {!!Form::close() !!}
+```
+now our delete button is getting submitted to destroy function so add this in destroy()
+```
+$post = Post::find($id);
+$post->delete();
+return redirect('/posts')->with('success','Post deleted');
+```
+and now we have deleted the post 
+now we have full crud functionality
 
 
 
