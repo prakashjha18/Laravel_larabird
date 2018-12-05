@@ -14,7 +14,7 @@ Laravel is a web application framework with expressive, elegant syntax. We belie
 # blog-website
 blog website with full authentication and database connectivity
 
-[Basic Routing & Controllers](#basic-routing-&-controllers)
+[Basic Routing & Controllers](#basic-routing-and-controllers)
 
 # setting up laravel project
 
@@ -37,7 +37,7 @@ php artisan serve
 now your laravel application in deployed in localhost 
 
 
-# Basic Routing & Controllers
+# Basic Routing and Controllers
 we usually dont want to create route directly from web.php that will direct to a folder that is not a good practice
 what we would want to do is to create a controller and teh set the route to a given controller function and then direct that function to specific page
 ```
