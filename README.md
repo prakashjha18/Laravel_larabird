@@ -460,6 +460,130 @@ now create the file show.blade.php in posts folder and include this file
 ```
 i don't think explaination for thi will be required if you have paid attention on above documntation so now we can see individual post in individual pages
 
+# forms and saving data
+
+to create our posts include this code
+```
+public function create()
+    {
+        return view('posts.create');
+    }
+```
+you know the other step which is to create a file as create.blade.php in posts folder
+now we need a form to in this file here comes other concept of form which is laravel collective 
+we need to write this in terminal
+```
+composer require "laravelcollective/html":"^5.4.0"
+```
+Next, add your new provider to the providers array of config/app.php:
+
+ ``` 
+ 'providers' => [
+    // ...
+    Collective\Html\HtmlServiceProvider::class,
+    // ...
+  ],
+  ```
+Finally, add two class aliases to the aliases array of config/app.php:
+
+ ``` 'aliases' => [
+    // ...
+      'Form' => Collective\Html\FormFacade::class,
+      'Html' => Collective\Html\HtmlFacade::class,
+    // ...
+  ],
+  ```
+  see the documentation of laravel collective here https://laravelcollective.com/docs/master/html after we are done creating our project
+  now in create.blade.php
+  ```
+@extends('layouts.app')
+
+@section('content')
+
+      <h1>create your post</h1>
+      {!! Form::open(['action' => 'PostsController@store', 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
+          <div class="form-group">
+          	 {{Form::label('title','Title')}}
+          	 {{Form::text('title','',['class' => 'form-control', 'placeholder' => 'Title' ])}}
+          </div>
+          <div class="form-group">
+          	 {{Form::label('body','Body')}}
+          	 {{Form::textarea('body','',['class' => 'form-control', 'placeholder' => 'body text' ])}}
+          </div>
+             {{Form::submit('Submit',['Class'=>'btn btn-primary'])}}
+      {!! Form::close() !!}
+@endsection
+```
+if you know simple bootstrap then you can easily understand the params here
+now when we submit our form its gonna make submit request to store()
+in store function
+```
+$this->validate($request, [
+            'title' => 'required',
+            'body'  => 'required',
+            
+        ]);
+       
+       
+       //create post
+        $post = new post;
+        $post->title = $request->input('title');
+        $post->body = $request->input('body');
+        
+        $post->save();
+
+
+        return redirect('/posts')->with('success','Post Created');
+  ```      
+the $this->validate is for validation in laravel of the post which we have requested, $post = new post; just creats the new post and assigns it to $post and now if we add all the feild and click submit our post will be added to the database, what if we have not input any value and we click submit, then our post will not submit and to display message we have to crea session 
+so in inc folder creatte messages.blade.php and include this file
+```
+@if(count($errors)>0)
+    @foreach($errors->all() as $error)
+       <div class="alert alert-danger">
+       	  {{$error}}
+       </div>
+    @endforeach
+@endif 
+
+@if(session('success'))
+    <div class="alert alert-success">
+    	{{session('success')}}
+    </div>
+@endif
+
+@if(session('error'))
+    <div class="alert alert-danger">
+    	{{session('error')}}
+    </div>
+@endif
+```
+$error will show session if the titles and body are not filled
+and other will show based on our success of submitting form.
+now in layouts/app.blade.php include the messages file in div id app
+```
+<div id="app">
+
+        @include('inc.navbar')
+        <div class="container">
+              @include('inc.messages')
+             
+            @yield('content')
+        
+    </div>
+ ```
+ and now we are good to go our form validatioon stuff is added, sessions are handled
+ yes so now we have done create and read work from database
+
+
+
+
+
+
+
+
+
+
 
 
 
