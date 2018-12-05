@@ -575,7 +575,7 @@ now in layouts/app.blade.php include the messages file in div id app
  and now we are good to go our form validatioon stuff is added, sessions are handled
  yes so now we have done create and read work from database
 in you navbar create a link with ```href="/posts/create``` that'll do for now you can also use laravel cke-editor for body of your form
-
+#123
 
 
 
