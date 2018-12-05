@@ -14,7 +14,7 @@ Laravel is a web application framework with expressive, elegant syntax. We belie
 # blog-website
 blog website with full authentication and database connectivity
 
-[Basic Routing & Controllers](Basic Routing & Controllers)
+[Basic Routing & Controllers](#Basic-Routing-&-Controllers)
 
 # setting up laravel project
 
