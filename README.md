@@ -13,3 +13,21 @@ blog website with full authentication and database connectivity
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as:
 
+# setting up laravel project
+
+## step 1
+you need to have git, xampp  installed in you system
+
+## step 2
+install composer
+Composer is a dependency manager for PHP like Pip is for python. Here we will use composer to install laravel project and its dependency. To install composer visit https://getcomposer.org/download/
+## step 3
+composer create-project laravel/laravel lsapp
+and now laravel is installed in you system 
+
+## step 4
+```
+php artisan serve
+```
+now you laravel application in deployed in localhost 
+
