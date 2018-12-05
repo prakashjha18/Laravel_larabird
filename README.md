@@ -288,7 +288,103 @@ now update your ```app.blade.php``` with this code, i think only one line is cha
 </body>
 </html>
 ```
-well i think we are done with most of the fornt-end work next we will strat working with database, Eloquest Orm, relations and more stuff..
-    
+well i think we are done with most of the frontt-end work next we will start working with database, Eloquest Orm, relations and more stuff..
+
+# Models and & Database Migrations
+I'm assuming that you are using XAMPP. go to http://localhost/phpmyadmin/ and create a new table as larablog
+now to to .env and enter this
+```
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=larablog
+DB_USERNAME=root
+DB_PASSWORD=
+```
+if everything while installing XAMPP was default and you have not change db access this this will be the same for you laravel application too
+now we are ready to go
+in terminal 
+
+we also want to create a model
+```php artisan make:model Post -m``` beacause to this two things will be added 
+1)app/Post.php
+2)create post table in database migrations
+in create_post_table.php include
+```
+public function up()
+    {
+        Schema::create('posts', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('title');
+            $table->mediumText('body');
+            $table->timestamps();
+        });
+    }
+```
+the up() will create all this columns in our posts table of database 
+while migration u might get an erroer therefore to avoid the error do this in ```Providers/AppServiceProvider.php```
+```
+
+use Illuminate\Support\Facades\Schema;
+
+
+    public function boot()
+    {
+        Schema::defaultStringLength(191);
+    }
+
+   
+}
+```
+now open the terminal and 
+```php artisan migrate```
+and now you will see the table in your mysql database
+
+## tinker
+tinker is a laravel concept or method to interact with our database hence go to terminal ```php artisan tinker```
+insert the values in your table using tinker
+```
+$post = new App\Post();
+$post->title = 'Post One';
+$post->body = 'this is post body';
+$post->save();
+```
+go on and add another
+$post creates a kind of instance of our Model Post 
+now get out of tinker by writing ```quit```
+now in terminal 
+```php artisan make:controller Postscontroller --resource```
+now this will automatically include 6 functions
+which are
+```
+index to list all the posts                               --no parameters needed
+create to create the posts                                --no parameters needed
+store to store the values in db from form                 --request parameters needed to store the values 
+show to show the id of posts                              --id parameters needed
+edit for same reson needed id paramets ti edit which form --id parameters needed
+update neede request and id because we are submitting
+and we want to know which post to update                  --id and request parameter needed
+destroy to delte the post of user                         --id parameter needed
+```
+now comes the routing part u might be wondering that now with this 7 functions we have so much to write in ```web.php```
+well you are wrong ```--resource``` thing while making controller helped a lot, now u just have to add this in ```web.php``
+```
+Route::resource('posts','PostsController');
+``` 
+and we are done the ```posts``` is accosiated with PostsController and this justs binds with our view which we will be using next
+
+you can also see all the routes for your application by writhing this command in your terminal
+
+```php artisan route:list```
+
+
+
+
+
+
+
+
+
+
     
 
