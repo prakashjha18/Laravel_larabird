@@ -377,7 +377,88 @@ you can also see all the routes for your application by writhing this command in
 
 ```php artisan route:list```
 
+# Fetching data with Eloquent
+now in navbar when we block in BLOGS the index function of PostController.php is called in order to show th data we have to first write ```use App\Post;``` above the class and this simply means we are bringing the Post class of Post.php
+now add this code in index() function of our PostController.php 
+```
+public function index()
+    {
+       $posts = Post::orderBy('created_at','desc')->paginate(10);
+       return view('posts.index')->with('posts',$posts);
+     }
+```
+here $posts fetches the table connent of our post.php
+you can even you some more eloquent syntax like these
+```
+$posts = Post::all();
+return Post::where('title','Post Two')->get();
+$posts = Post::orderBy('title','desc')->take(2)->get();
+$posts = Post::orderBy('title','desc')->get();
+```
+experiment with them if you want
 
+now create a folder named posts and file named index.blade.php and include this code there
+
+```
+@extends('layouts.app')
+
+@section('content')
+
+      <h1>Posts</h1>
+      @if(count($posts)>0)
+         @foreach($posts as $post)
+
+            <div class ="list-group-item">
+              <div class="row">
+                <div class="col-md-4 col-sm-8">
+                  <h3><a href="/posts/{{$post->id}}">{{$post->title}}</a></h3>
+               <small>Written on {{$post->created_at}} by {{$post->user->name}}</small>
+                </div>
+              </div>    
+             </div>
+          @endforeach 
+          {{$posts->links()}} 	
+      @else
+         <p>no posts found</p>
+      @endif   
+
+@endsection
+```
+very basic stuff done here we passed the $posts in index function to our index.blade.php. so now get your mind clear any variable used in index.blade.php is not global they all are passed
+now notice this ```href="/posts/{{$post->id}}"``` by clicking this link will call ```show()``` function 
+```{{$posts->links()}}``` if for pagination, for now it will kick in if we have more than 10 posts because we wrote this ```paginate(10);``` in index() you can change to value from 10 to 1 if you want to experiment. go on and then come back.
+see thats how even the concept of pagination is simple in laravel (love for this framework just keeps growing)
+include this code in show function
+```
+public function show($id)
+    {
+        //
+        $post = post::find($id);
+        return view('posts.show')->with('post',$post);
+
+    }
+ ```
+post::find($id); simply fetches the post by that id and incase you are wondering what is this? is this some code of php, NO this ELOQUENT ORM a way to interact with database just like SQL but way better and cleaner.
+now create the file show.blade.php in posts folder and include this file
+```
+@extends('layouts.app')
+
+@section('content')
+
+      <h1>{{$post->title}}</h1>
+      <br><br>
+      <div>
+         {{{$post->body}}
+      </div> 
+      <hr>
+      <small>Written on {{$post->created_at}}</small> 
+      <br>
+      <br>
+      <hr>
+      <a href="/posts" class="btn btn-primary btn-lg">Go Back</a> 
+@endsection
+```
+i don't think explaination for thi will be required if you have paid attention on above documntation so now we can see individual post in individual pages
 
 
 
