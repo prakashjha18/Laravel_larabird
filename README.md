@@ -11,7 +11,7 @@ Laravel is a web application framework with expressive, elegant syntax. We belie
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
 </p>
 
-# blog-website
+# bird-listings-website
 blog website with full authentication and database connectivity
 
 [Basic Routing & Controllers](#basic-routing-and-controllers)
