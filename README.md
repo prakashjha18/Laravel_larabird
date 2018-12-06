@@ -16,12 +16,12 @@ blog website with full authentication and database connectivity
 
 ## this docs consists of:
 
-*[Basic Routing & Controllers](#basic-routing-and-controllers)
-*[Blade templating](#blade-templating)
-*[Models and Database Migrations](#models-and-database-migrations)
-*[Fetching data with Eloquent](#fetching-data-with-eloquent)
-*[forms and saving data](#forms-and-saving-data)
-*[Edit and delete data](#edit-and-delete-data)
+1)[Basic Routing & Controllers](#basic-routing-and-controllers)
+2)[Blade templating](#blade-templating)
+3)[Models and Database Migrations](#models-and-database-migrations)
+4)[Fetching data with Eloquent](#fetching-data-with-eloquent)
+5)[forms and saving data](#forms-and-saving-data)
+6)[Edit and delete data](#edit-and-delete-data)
 
 # setting up laravel project
 
