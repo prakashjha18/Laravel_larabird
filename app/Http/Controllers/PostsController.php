@@ -55,7 +55,9 @@ class PostsController extends Controller
         $this->validate($request, [
             'title' => 'required',
             'body'  => 'required',
-            'cover_image' => 'image|nullable|max:1999'
+            'cover_image' => 'image|nullable|max:1999',
+            'location' => 'required',
+            'lat' => 'required'
         ]);
        
         if($request->hasFile('cover_image')){
@@ -77,6 +79,11 @@ class PostsController extends Controller
         $post = new post;
         $post->title = $request->input('title');
         $post->body = $request->input('body');
+        $post->species_name=$request->input('species_name');
+        $post->number_sigh=$request->input('number_sigh');
+        $post->location=$request->input('location');
+        $post->lng  = $request->input('lng');
+        $post->lat  = $request->input('lat');
         $post->user_id = auth()->user()->id;
         $post->cover_image=$fileNameToStore;
         $post->save();
@@ -147,6 +154,12 @@ class PostsController extends Controller
         $post = post::find($id);
         $post->title = $request->input('title');
         $post->body = $request->input('body');
+        $post->species_name=$request->input('species_name');
+        $post->number_sigh=$request->input('number_sigh');
+        $post->location=$request->input('location');
+        $post->lng  = $request->input('lng');
+        $post->lat  = $request->input('lat');
+
         if($request->hasFile('cover_image')){
             $post->cover_image = $fileNameToStore;
         }

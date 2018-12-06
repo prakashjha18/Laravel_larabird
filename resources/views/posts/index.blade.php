@@ -22,7 +22,7 @@
                <small>Written on {{$post->created_at}} by {{$post->user->name}}</small> --}}
             </div>
           @endforeach 
-          {{$posts->links()}} 	
+          {{$posts->links()}}	
       @else
          <p>no posts found</p>
       @endif   

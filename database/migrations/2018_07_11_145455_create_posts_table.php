@@ -16,6 +16,11 @@ class CreatePostsTable extends Migration
         Schema::create('posts', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title');
+            $table->double('lat',20,14);
+            $table->string('species_name');
+            $table->string('number_sigh');
+            $table->string('location');
+            $table->double('lng',20,14);
             $table->mediumText('body');
             $table->timestamps();
         });
