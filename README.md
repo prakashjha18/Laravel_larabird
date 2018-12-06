@@ -14,7 +14,14 @@ Laravel is a web application framework with expressive, elegant syntax. We belie
 # bird-listings-website
 blog website with full authentication and database connectivity
 
+## this docs consists of:
+
 [Basic Routing & Controllers](#basic-routing-and-controllers)
+[Blade templating](#blade-templating)
+[Models and Database Migrations](#models-and-database-migrations)
+[Fetching data with Eloquent](f#etching-data-with-eloquent)
+[forms and saving data](#forms-and-saving-data)
+[Edit and delete data](#edit-and-delete-data)
 
 # setting up laravel project
 
@@ -291,7 +298,7 @@ now update your ```app.blade.php``` with this code, i think only one line is cha
 ```
 well i think we are done with most of the frontt-end work next we will start working with database, Eloquest Orm, relations and more stuff..
 
-# Models and & Database Migrations
+# Models and Database Migrations
 I'm assuming that you are using XAMPP. go to http://localhost/phpmyadmin/ and create a new table as larablog
 now to to .env and enter this
 ```
@@ -633,7 +640,7 @@ $this->validate($request, [
         return redirect('/posts')->with('success','Post updated');
   ```      
 now we have updated the data 
-# delete data
+## delete data
 
 add this in show.blade.php
 ```
