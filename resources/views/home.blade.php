@@ -21,6 +21,7 @@
                         <tr>
                             <th>Title</th>
                             <th></th>
+                            <caption>github</caption>
                             <th></th>
                         </tr>
                        @foreach($posts as $post)
