@@ -38,7 +38,7 @@
                        @endforeach
                     </table>
                     @else
-                       <p>you have no posts</p>
+                       <p>you have no posts</p>//hello world
 
                     @endif    
 
