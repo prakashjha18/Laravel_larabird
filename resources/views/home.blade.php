@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card">
+            <div class="card">  //divyams comment
                 <div class="card-header">Dashboard</div>
 
                 <div class="card-body">
@@ -22,7 +22,7 @@
                             <th>Title</th>
                             <th></th>
                             <th></th>
-                        </tr>
+                        </tr>          
                        @foreach($posts as $post)
                         <tr>
                             <th>{{$post->title}}</th>
