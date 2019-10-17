@@ -19,7 +19,7 @@
                     @if(count($posts)>0)
                     <table class="table table-striped">
                         <tr>
-                            <th>Title</th>
+                            <th>Title</th>//rkgupta
                             <th></th>
                             <th></th>
                         </tr>
