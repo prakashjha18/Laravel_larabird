@@ -23,7 +23,7 @@
                             <th></th>
                             <th></th>
                         </tr>
-                       @foreach($posts as $post)
+                       @foreach($posts as $post) //shivamita
                         <tr>
                             <th>{{$post->title}}</th>
                             <th><a href="/posts/{{$post->id}}/edit" class="btn btn-default">Edit</a></th>
