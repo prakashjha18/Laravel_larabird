@@ -2,6 +2,7 @@
 @include('layouts.maps')
 @section('content')
 
+//adding comment for pull request
 
       <h1>create your post</h1>
       <head>
